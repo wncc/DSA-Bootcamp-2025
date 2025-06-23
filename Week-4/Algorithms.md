@@ -153,115 +153,116 @@ Answer:
 ![][image4]
 
 ## Code in python:
-
-\# O(n) solution for finding  
-\# maximum sum of a subarray of size k
+```python
+# O(n) solution for finding  
+# maximum sum of a subarray of size k
 
 def maxSum(arr, k):  
-      
-    \# length of the array  
-    n \= len(arr)
+    # Length of the array  
+    n = len(arr)
 
-    \# n must be greater than k  
-    if n \<= k:  
+    # n must be greater than or equal to k  
+    if n <= k:  
         print("Invalid")  
-        return \-1
+        return -1
 
-    \# Compute sum of first window of size k  
-    window\_sum \= sum(arr\[:k\])
+    # Compute sum of first window of size k  
+    window_sum = sum(arr[:k])
 
-    \# first sum available  
-    max\_sum \= window\_sum
+    # First sum available  
+    max_sum = window_sum
 
-    \# Compute the sums of remaining windows by  
-    \# removing first element of previous  
-    \# window and adding last element of  
-    \# the current window.  
-    for i in range(n \- k):  
-        window\_sum \= window\_sum \- arr\[i\] \+ arr\[i \+ k\]  
-        max\_sum \= max(window\_sum, max\_sum)
+    # Compute the sums of remaining windows by  
+    # removing the first element of previous  
+    # window and adding the last element of  
+    # the current window  
+    for i in range(n - k):  
+        window_sum = window_sum - arr[i] + arr[i + k]  
+        max_sum = max(window_sum, max_sum)
 
-    return max\_sum
+    return max_sum
 
-\# Driver code  
-arr \= \[1, 4, 2, 10, 2, 3, 1, 0, 20\]  
-k \= 4  
+# Driver code  
+arr = [1, 4, 2, 10, 2, 3, 1, 0, 20]  
+k = 4  
 print(maxSum(arr, k))
+```
+
 
 ## Code in C++:
 
-\#include \<iostream\>  
-\#include \<vector\>  
+```cpp
+#include <iostream>  
+#include <vector>  
 using namespace std;
 
-// Returns maximum sum in a subarray of size k.  
-int maxSum(vector\<int\>& arr, int k)  
+// Returns maximum sum in a subarray of size k  
+int maxSum(vector<int>& arr, int k)  
 {  
-    int n \= arr.size();
+    int n = arr.size();
 
     // n must be greater  
-    if (n \<= k) {  
-        cout \<\< "Invalid";  
-        return \-1;  
+    if (n <= k) {  
+        cout << "Invalid";  
+        return -1;  
     }
 
     // Compute sum of first window of size k  
-    int max\_sum \= 0;  
-    for (int i \= 0; i \< k; i++)  
-        max\_sum \+= arr\[i\];
+    int max_sum = 0;  
+    for (int i = 0; i < k; i++)  
+        max_sum += arr[i];
 
-    // Compute sums of remaining windows by  
-    // removing first element of previous  
-    // window and adding last element of  
-    // current window.  
-    int window\_sum \= max\_sum;  
-    for (int i \= k; i \< n; i++) {  
-        window\_sum \+= arr\[i\] \- arr\[i \- k\];  
-        max\_sum \= max(max\_sum, window\_sum);  
+    // Compute sums of remaining windows  
+    int window_sum = max_sum;  
+    for (int i = k; i < n; i++) {  
+        window_sum += arr[i] - arr[i - k];  
+        max_sum = max(max_sum, window_sum);  
     }
 
-    return max\_sum;  
+    return max_sum;  
 }
 
 // Driver code  
 int main()  
 {  
-    vector\<int\> arr \= { 1, 4, 2, 10, 2, 3, 1, 0, 20 };  
-    int k \= 4;  
-    cout \<\< maxSum(arr, k);  
+    vector<int> arr = { 1, 4, 2, 10, 2, 3, 1, 0, 20 };  
+    int k = 4;  
+    cout << maxSum(arr, k);  
     return 0;  
 }
+```
 
 ## Code in javascript:
-
+```javascript
 function maxSum(arr, k) {  
-    const n \= arr.length;  
-    if (n \< k) {  
+    const n = arr.length;  
+    if (n < k) {  
         console.log("Invalid");  
-        return \-1;  
+        return -1;  
     }
 
     // Compute sum of first window of size k  
-    let windowSum \= 0;  
-    for (let i \= 0; i \< k; i++) {  
-        windowSum \+= arr\[i\];  
+    let windowSum = 0;  
+    for (let i = 0; i < k; i++) {  
+        windowSum += arr[i];  
     }
 
-    let maxSum \= windowSum;
+    let maxSum = windowSum;
 
     // Slide the window from start to end of the array  
-    for (let i \= k; i \< n; i++) {  
-        windowSum \+= arr\[i\] \- arr\[i \- k\];  
-        maxSum \= Math.max(maxSum, windowSum);  
+    for (let i = k; i < n; i++) {  
+        windowSum += arr[i] - arr[i - k];  
+        maxSum = Math.max(maxSum, windowSum);  
     }
 
     return maxSum;  
 }
 
-// Example usage  
-const arr \= \[1, 4, 2, 10, 2, 3, 1, 0, 20\];  
-const k \= 4;  
-console.log(maxSum(arr, k)); // Output: 24
+// Example usage
+const arr = [1, 4, 2, 10, 2, 3, 1, 0, 20];
+const k = 4;
+console.log(maxSum(arr, k));
+```
 
 **Time complexity: O(n)**  
 **Space complexity: O(1)**
@@ -278,9 +279,9 @@ Let’s multiply two numbers `X` and `Y`, each of **n digits**.
 
 Split each number into two parts:
 
-X \= A \* 10^(n/2) \+ B
+X = A * 10^(n/2) + B
 
-Y \= C \* 10^(n/2) \+ D
+Y = C * 10^(n/2) + D
 
 Where:
 
@@ -299,7 +300,7 @@ Karatsuba reduces this to **3 multiplications** by calculating:
 
 Then use:
 
-X \* Y \= P1 \* 10^n \+ (P3 \- P1 \- P2) \* 10^(n/2) \+ P2
+X * Y = P1 * 10^n + (P3 - P1 - P2) * 10^(n/2) + P2
 
 **Algorithm Steps:**
 
@@ -321,74 +322,84 @@ Where `m = n/2`.
 **Code implementation:**
 
 1. **In python:**  
-   def karatsuba(x, y):  
-       \# Base case for recursion  
-       if x \< 10 or y \< 10:  
-           return x \* y  
-     
-       \# Calculates the size of the numbers  
-       n \= max(len(str(x)), len(str(y)))  
-       m \= n // 2  
-     
-       \# Splits the numbers  
-       high1, low1 \= divmod(x, 10\*\*m)  
-       high2, low2 \= divmod(y, 10\*\*m)  
-     
-       \# Recursive calls  
-       P1 \= karatsuba(high1, high2)  
-       P2 \= karatsuba(low1, low2)  
-       P3 \= karatsuba(high1 \+ low1, high2 \+ low2)  
-     
-       return P1 \* 10\*\*(2 \* m) \+ (P3 \- P1 \- P2) \* 10\*\*m \+ P2  
+```python
+def karatsuba(x, y):  
+    # Base case for recursion  
+    if x < 10 or y < 10:  
+        return x * y  
+ 
+    # Calculates the size of the numbers  
+    n = max(len(str(x)), len(str(y)))  
+    m = n // 2  
+ 
+    # Splits the numbers  
+    high1, low1 = divmod(x, 10**m)  
+    high2, low2 = divmod(y, 10**m)  
+ 
+    # Recursive calls  
+    P1 = karatsuba(high1, high2)  
+    P2 = karatsuba(low1, low2)  
+    P3 = karatsuba(high1 + low1, high2 + low2)  
+ 
+    return P1 * 10**(2 * m) + (P3 - P1 - P2) * 10**m + P2
+```
+
      
 2. **In C++:**  
-   \#include \<iostream\>  
-   \#include \<cmath\>  
-   using namespace std;  
-     
-   long long karatsuba(long long x, long long y) {  
-       if (x \< 10 || y \< 10\)  
-           return x \* y;  
-     
-       int n \= max((int)log10(x) \+ 1, (int)log10(y) \+ 1);  
-       int m \= n / 2;  
-       long long high1 \= x / (long long)pow(10, m);  
-       long long low1 \= x % (long long)pow(10, m);  
-       long long high2 \= y / (long long)pow(10, m);  
-       long long low2 \= y % (long long)pow(10, m);  
-     
-       long long P1 \= karatsuba(high1, high2);  
-       long long P2 \= karatsuba(low1, low2);  
-       long long P3 \= karatsuba(high1 \+ low1, high2 \+ low2);  
-     
-       return P1 \* (long long)pow(10, 2 \* m) \+ (P3 \- P1 \- P2) \* (long long)pow(10, m) \+ P2;  
-   }  
-     
-   int main() {  
-       cout \<\< karatsuba(1234, 5678\) \<\< endl;  
-       return 0;  
-   }  
+```cpp
+#include <iostream>  
+#include <cmath>  
+using namespace std;  
+
+long long karatsuba(long long x, long long y) {  
+    if (x < 10 || y < 10)  
+        return x * y;  
+
+    int n = max((int)log10(x) + 1, (int)log10(y) + 1);  
+    int m = n / 2;  
+
+    long long high1 = x / (long long)pow(10, m);  
+    long long low1  = x % (long long)pow(10, m);  
+    long long high2 = y / (long long)pow(10, m);  
+    long long low2  = y % (long long)pow(10, m);  
+
+    long long P1 = karatsuba(high1, high2);  
+    long long P2 = karatsuba(low1, low2);  
+    long long P3 = karatsuba(high1 + low1, high2 + low2);  
+
+    return P1 * (long long)pow(10, 2 * m) + (P3 - P1 - P2) * (long long)pow(10, m) + P2;  
+}  
+
+int main() {  
+    cout << karatsuba(1234, 5678) << endl;  
+    return 0;  
+}
+```
+
      
 3. **In javascript:**  
-   function karatsuba(x, y) {  
-       if (x \< 10 || y \< 10\) return x \* y;  
-     
-       const n \= Math.max(x.toString().length, y.toString().length);  
-       const m \= Math.floor(n / 2);  
-     
-       const high1 \= Math.floor(x / 10 \*\* m);  
-       const low1 \= x % 10 \*\* m;  
-       const high2 \= Math.floor(y / 10 \*\* m);  
-       const low2 \= y % 10 \*\* m;  
-     
-       const P1 \= karatsuba(high1, high2);  
-       const P2 \= karatsuba(low1, low2);  
-       const P3 \= karatsuba(high1 \+ low1, high2 \+ low2);  
-     
-       return P1 \* 10 \*\* (2 \* m) \+ (P3 \- P1 \- P2) \* 10 \*\* m \+ P2;  
-   }  
-     
-   console.log(karatsuba(1234, 5678)); // Output: 7006652  
+```javascript
+function karatsuba(x, y) {  
+    if (x < 10 || y < 10) return x * y;  
+
+    const n = Math.max(x.toString().length, y.toString().length);  
+    const m = Math.floor(n / 2);  
+
+    const high1 = Math.floor(x / 10 ** m);  
+    const low1 = x % 10 ** m;  
+    const high2 = Math.floor(y / 10 ** m);  
+    const low2 = y % 10 ** m;  
+
+    const P1 = karatsuba(high1, high2);  
+    const P2 = karatsuba(low1, low2);  
+    const P3 = karatsuba(high1 + low1, high2 + low2);  
+
+    return P1 * 10 ** (2 * m) + (P3 - P1 - P2) * 10 ** m + P2;  
+}  
+
+console.log(karatsuba(1234, 5678)); // Output: 7006652
+```
+
      
    **Time complexity: O(n^1.585)**  
    **Space complexity: O(log n)**  
@@ -416,326 +427,272 @@ Strassen reduces this to **7** multiplications using a specific combination of s
 
 Compute these intermediate products:
 
-1. M1 \= (A11 \+ A22) × (B11 \+ B22)
+1. M1 = (A11 + A22) × (B11 + B22)  
+2. M2 = (A21 + A22) × B11  
+3. M3 = A11 × (B12 - B22)  
+4. M4 = A22 × (B21 - B11)  
+5. M5 = (A11 + A12) × B22  
+6. M6 = (A21 - A11) × (B11 + B12)  
+7. M7 = (A12 - A22) × (B21 + B22)
 
-2. M2 \= (A21 \+ A22) × B11
-
-3. M3 \= A11 × (B12 \- B22)
-
-4. M4 \= A22 × (B21 \- B11)
-
-5. M5 \= (A11 \+ A12) × B22
-
-6. M6 \= (A21 \- A11) × (B11 \+ B12)
-
-7. M7 \= (A12 \- A22) × (B21 \+ B22)  
    **Final Result (C Matrix)**
 
 Now, the resulting matrix **C** is:
 
-`C = |C11  C12|`
-
+`C = |C11  C12|`  
     `|C21  C22|`
 
 Where:
+* C11 = M1 + M4 - M5 + M7  
+* C12 = M3 + M5  
+* C21 = M2 + M4  
+* C22 = M1 - M2 + M3 + M6
 
-* C11 \= M1 \+ M4 \- M5 \+ M7
-
-* C12 \= M3 \+ M5
-
-* C21 \= M2 \+ M4
-
-* C22 \= M1 \- M2 \+ M3 \+ M6
 
 **Code implementation:**
 
 1. **In python:**  
-   def add(A, B):  
-       return \[\[A\[i\]\[j\] \+ B\[i\]\[j\] for j in range(len(A))\] for i in range(len(A))\]  
-   def sub(A, B):  
-       return \[\[A\[i\]\[j\] \- B\[i\]\[j\] for j in range(len(A))\] for i in range(len(A))\]  
-   def strassen(A, B):  
-       n \= len(A)  
-       if n \== 1:  
-           return \[\[A\[0\]\[0\] \* B\[0\]\[0\]\]\]  
-       k \= n // 2  
-       A11 \= \[row\[:k\] for row in A\[:k\]\]  
-       A12 \= \[row\[k:\] for row in A\[:k\]\]  
-       A21 \= \[row\[:k\] for row in A\[k:\]\]  
-       A22 \= \[row\[k:\] for row in A\[k:\]\]  
-       B11 \= \[row\[:k\] for row in B\[:k\]\]  
-       B12 \= \[row\[k:\] for row in B\[:k\]\]  
-       B21 \= \[row\[:k\] for row in B\[k:\]\]  
-       B22 \= \[row\[k:\] for row in B\[k:\]\]  
-       M1 \= strassen(add(A11, A22), add(B11, B22))  
-       M2 \= strassen(add(A21, A22), B11)  
-       M3 \= strassen(A11, sub(B12, B22))  
-       M4 \= strassen(A22, sub(B21, B11))  
-       M5 \= strassen(add(A11, A12), B22)  
-       M6 \= strassen(sub(A21, A11), add(B11, B12))  
-       M7 \= strassen(sub(A12, A22), add(B21, B22))  
-       C11 \= add(sub(add(M1, M4), M5), M7)  
-       C12 \= add(M3, M5)  
-       C21 \= add(M2, M4)  
-       C22 \= add(sub(add(M1, M3), M2), M6)  
-       \# Combine 4 submatrices into one  
-       C \= \[C11\[i\] \+ C12\[i\] for i in range(k)\] \+ \[C21\[i\] \+ C22\[i\] for i in range(k)\]  
-       return C  
-   def print\_matrix(M):  
-       for row in M:  
-           print(\*row)  
-   \# Example usage  
-   if \_\_name\_\_ \== "\_\_main\_\_":  
-       n \= int(input("Enter matrix dimension (power of 2): "))  
-       print("Enter Matrix A:")  
-       A \= \[list(map(int, input().split())) for \_ in range(n)\]  
-       print("Enter Matrix B:")  
-       B \= \[list(map(int, input().split())) for \_ in range(n)\]  
-       print("Resultant Matrix:")  
-       print\_matrix(strassen(A, B))  
+```python
+def add(A, B):
+    return [[A[i][j] + B[i][j] for j in range(len(A))] for i in range(len(A))]
+
+def sub(A, B):
+    return [[A[i][j] - B[i][j] for j in range(len(A))] for i in range(len(A))]
+
+def strassen(A, B):
+    n = len(A)
+    if n == 1:
+        return [[A[0][0] * B[0][0]]]
+
+    k = n // 2
+
+    A11 = [row[:k] for row in A[:k]]
+    A12 = [row[k:] for row in A[:k]]
+    A21 = [row[:k] for row in A[k:]]
+    A22 = [row[k:] for row in A[k:]]
+
+    B11 = [row[:k] for row in B[:k]]
+    B12 = [row[k:] for row in B[:k]]
+    B21 = [row[:k] for row in B[k:]]
+    B22 = [row[k:] for row in B[k:]]
+
+    M1 = strassen(add(A11, A22), add(B11, B22))
+    M2 = strassen(add(A21, A22), B11)
+    M3 = strassen(A11, sub(B12, B22))
+    M4 = strassen(A22, sub(B21, B11))
+    M5 = strassen(add(A11, A12), B22)
+    M6 = strassen(sub(A21, A11), add(B11, B12))
+    M7 = strassen(sub(A12, A22), add(B21, B22))
+
+    C11 = add(sub(add(M1, M4), M5), M7)
+    C12 = add(M3, M5)
+    C21 = add(M2, M4)
+    C22 = add(sub(add(M1, M3), M2), M6)
+
+    # Combine 4 submatrices into one
+    C = [C11[i] + C12[i] for i in range(k)] + [C21[i] + C22[i] for i in range(k)]
+
+    return C
+
+def print_matrix(M):
+    for row in M:
+        print(*row)
+
+# Example usage
+if __name__ == "__main__":
+    n = int(input("Enter matrix dimension (power of 2): "))
+    print("Enter Matrix A:")
+    A = [list(map(int, input().split())) for _ in range(n)]
+    print("Enter Matrix B:")
+    B = [list(map(int, input().split())) for _ in range(n)]
+    print("Resultant Matrix:")
+    print_matrix(strassen(A, B))
+```
+
      
 2. **In c++:**
-
-\#include \<iostream\>
-
-\#include \<vector\>
+```cpp
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-typedef vector\<vector\<int\>\> Matrix;
+typedef vector<vector<int>> Matrix;
 
 // Function to add two matrices
-
 Matrix add(Matrix A, Matrix B) {
-
-    int n \= A.size();
-
-    Matrix result(n, vector\<int\>(n, 0));
-
-    for (int i \= 0; i \< n; i++)
-
-        for (int j \= 0; j \< n; j++)
-
-            result\[i\]\[j\] \= A\[i\]\[j\] \+ B\[i\]\[j\];
-
+    int n = A.size();
+    Matrix result(n, vector<int>(n, 0));
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            result[i][j] = A[i][j] + B[i][j];
     return result;
-
 }
 
 // Function to subtract two matrices
-
 Matrix subtract(Matrix A, Matrix B) {
-
-    int n \= A.size();
-
-    Matrix result(n, vector\<int\>(n, 0));
-
-    for (int i \= 0; i \< n; i++)
-
-        for (int j \= 0; j \< n; j++)
-
-            result\[i\]\[j\] \= A\[i\]\[j\] \- B\[i\]\[j\];
-
+    int n = A.size();
+    Matrix result(n, vector<int>(n, 0));
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            result[i][j] = A[i][j] - B[i][j];
     return result;
-
 }
 
 // Recursive Strassen multiplication
-
 Matrix strassen(Matrix A, Matrix B) {
-
-    int n \= A.size();
-
-    Matrix result(n, vector\<int\>(n, 0));
+    int n = A.size();
+    Matrix result(n, vector<int>(n, 0));
 
     // Base case
-
-    if (n \== 1\) {
-
-        result\[0\]\[0\] \= A\[0\]\[0\] \* B\[0\]\[0\];
-
+    if (n == 1) {
+        result[0][0] = A[0][0] * B[0][0];
         return result;
-
     }
 
-    int k \= n / 2;
+    int k = n / 2;
 
     // Dividing matrices into 4 parts
+    Matrix A11(k, vector<int>(k)), A12(k, vector<int>(k)), A21(k, vector<int>(k)), A22(k, vector<int>(k));
+    Matrix B11(k, vector<int>(k)), B12(k, vector<int>(k)), B21(k, vector<int>(k)), B22(k, vector<int>(k));
 
-    Matrix A11(k, vector\<int\>(k)), A12(k, vector\<int\>(k)), A21(k, vector\<int\>(k)), A22(k, vector\<int\>(k));
+    for (int i = 0; i < k; i++)
+        for (int j = 0; j < k; j++) {
+            A11[i][j] = A[i][j];
+            A12[i][j] = A[i][j + k];
+            A21[i][j] = A[i + k][j];
+            A22[i][j] = A[i + k][j + k];
 
-    Matrix B11(k, vector\<int\>(k)), B12(k, vector\<int\>(k)), B21(k, vector\<int\>(k)), B22(k, vector\<int\>(k));
-
-    for (int i \= 0; i \< k; i++)
-
-        for (int j \= 0; j \< k; j++) {
-
-            A11\[i\]\[j\] \= A\[i\]\[j\];
-
-            A12\[i\]\[j\] \= A\[i\]\[j \+ k\];
-
-            A21\[i\]\[j\] \= A\[i \+ k\]\[j\];
-
-            A22\[i\]\[j\] \= A\[i \+ k\]\[j \+ k\];
-
-            B11\[i\]\[j\] \= B\[i\]\[j\];
-
-            B12\[i\]\[j\] \= B\[i\]\[j \+ k\];
-
-            B21\[i\]\[j\] \= B\[i \+ k\]\[j\];
-
-            B22\[i\]\[j\] \= B\[i \+ k\]\[j \+ k\];
-
+            B11[i][j] = B[i][j];
+            B12[i][j] = B[i][j + k];
+            B21[i][j] = B[i + k][j];
+            B22[i][j] = B[i + k][j + k];
         }
 
     // Computing 7 products using Strassen’s formula
-
-    Matrix M1 \= strassen(add(A11, A22), add(B11, B22));
-
-    Matrix M2 \= strassen(add(A21, A22), B11);
-
-    Matrix M3 \= strassen(A11, subtract(B12, B22));
-
-    Matrix M4 \= strassen(A22, subtract(B21, B11));
-
-    Matrix M5 \= strassen(add(A11, A12), B22);
-
-    Matrix M6 \= strassen(subtract(A21, A11), add(B11, B12));
-
-    Matrix M7 \= strassen(subtract(A12, A22), add(B21, B22));
+    Matrix M1 = strassen(add(A11, A22), add(B11, B22));
+    Matrix M2 = strassen(add(A21, A22), B11);
+    Matrix M3 = strassen(A11, subtract(B12, B22));
+    Matrix M4 = strassen(A22, subtract(B21, B11));
+    Matrix M5 = strassen(add(A11, A12), B22);
+    Matrix M6 = strassen(subtract(A21, A11), add(B11, B12));
+    Matrix M7 = strassen(subtract(A12, A22), add(B21, B22));
 
     // Combining the results into result matrix
+    Matrix C11 = add(subtract(add(M1, M4), M5), M7);
+    Matrix C12 = add(M3, M5);
+    Matrix C21 = add(M2, M4);
+    Matrix C22 = add(subtract(add(M1, M3), M2), M6);
 
-    Matrix C11 \= add(subtract(add(M1, M4), M5), M7);
-
-    Matrix C12 \= add(M3, M5);
-
-    Matrix C21 \= add(M2, M4);
-
-    Matrix C22 \= add(subtract(add(M1, M3), M2), M6);
-
-    for (int i \= 0; i \< k; i++)
-
-        for (int j \= 0; j \< k; j++) {
-
-            result\[i\]\[j\] \= C11\[i\]\[j\];
-
-            result\[i\]\[j \+ k\] \= C12\[i\]\[j\];
-
-            result\[i \+ k\]\[j\] \= C21\[i\]\[j\];
-
-            result\[i \+ k\]\[j \+ k\] \= C22\[i\]\[j\];
-
+    for (int i = 0; i < k; i++)
+        for (int j = 0; j < k; j++) {
+            result[i][j] = C11[i][j];
+            result[i][j + k] = C12[i][j];
+            result[i + k][j] = C21[i][j];
+            result[i + k][j + k] = C22[i][j];
         }
 
     return result;
-
 }
 
 // Function to print a matrix
-
 void printMatrix(Matrix A) {
-
     for (auto row : A) {
-
         for (auto el : row)
-
-            cout \<\< el \<\< " ";
-
-        cout \<\< endl;
-
+            cout << el << " ";
+        cout << endl;
     }
-
 }
 
 int main() {
-
     int n;
+    cout << "Enter matrix dimension (power of 2): ";
+    cin >> n;
 
-    cout \<\< "Enter matrix dimension (power of 2): ";
+    Matrix A(n, vector<int>(n));
+    Matrix B(n, vector<int>(n));
 
-    cin \>\> n;
+    cout << "Enter Matrix A:\n";
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            cin >> A[i][j];
 
-    Matrix A(n, vector\<int\>(n));
+    cout << "Enter Matrix B:\n";
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            cin >> B[i][j];
 
-    Matrix B(n, vector\<int\>(n));
+    Matrix C = strassen(A, B);
 
-    cout \<\< "Enter Matrix A:\\n";
-
-    for (int i \= 0; i \< n; i++)
-
-        for (int j \= 0; j \< n; j++)
-
-            cin \>\> A\[i\]\[j\];
-
-    cout \<\< "Enter Matrix B:\\n";
-
-    for (int i \= 0; i \< n; i++)
-
-        for (int j \= 0; j \< n; j++)
-
-            cin \>\> B\[i\]\[j\];
-
-    Matrix C \= strassen(A, B);
-
-    cout \<\< "Resultant Matrix C \= A × B :\\n";
-
+    cout << "Resultant Matrix C = A × B:\n";
     printMatrix(C);
 
     return 0;
-
 }
+```
 
 3. **In javascript:**  
-   function add(A, B) {  
-       return A.map((row, i) \=\> row.map((val, j) \=\> val \+ B\[i\]\[j\]));  
-   }  
-   function sub(A, B) {  
-       return A.map((row, i) \=\> row.map((val, j) \=\> val \- B\[i\]\[j\]));  
-   }  
-   function strassen(A, B) {  
-       const n \= A.length;  
-       if (n \=== 1\) return \[\[A\[0\]\[0\] \* B\[0\]\[0\]\]\];  
-       const k \= n / 2;  
-       const \[A11, A12, A21, A22\] \= splitMatrix(A, k);  
-       const \[B11, B12, B21, B22\] \= splitMatrix(B, k);  
-       const M1 \= strassen(add(A11, A22), add(B11, B22));  
-       const M2 \= strassen(add(A21, A22), B11);  
-       const M3 \= strassen(A11, sub(B12, B22));  
-       const M4 \= strassen(A22, sub(B21, B11));  
-       const M5 \= strassen(add(A11, A12), B22);  
-       const M6 \= strassen(sub(A21, A11), add(B11, B12));  
-       const M7 \= strassen(sub(A12, A22), add(B21, B22));  
-       const C11 \= add(sub(add(M1, M4), M5), M7);  
-       const C12 \= add(M3, M5);  
-       const C21 \= add(M2, M4);  
-       const C22 \= add(sub(add(M1, M3), M2), M6);  
-       return combineMatrix(C11, C12, C21, C22);  
-   }  
-   function splitMatrix(M, size) {  
-       const A11 \= M.slice(0, size).map(row \=\> row.slice(0, size));  
-       const A12 \= M.slice(0, size).map(row \=\> row.slice(size));  
-       const A21 \= M.slice(size).map(row \=\> row.slice(0, size));  
-       const A22 \= M.slice(size).map(row \=\> row.slice(size));  
-       return \[A11, A12, A21, A22\];  
-   }  
-   function combineMatrix(C11, C12, C21, C22) {  
-       const top \= C11.map((row, i) \=\> \[...row, ...C12\[i\]\]);  
-       const bottom \= C21.map((row, i) \=\> \[...row, ...C22\[i\]\]);  
-       return \[...top, ...bottom\];  
-   }  
-   // Example usage  
-   const A \= \[  
-       \[1, 2\],  
-       \[3, 4\]  
-   \];  
-   const B \= \[  
-       \[5, 6\],  
-       \[7, 8\]  
-   \];  
-   const result \= strassen(A, B);  
-   console.log("Resultant Matrix:");  
-   result.forEach(row \=\> console.log(row.join(" ")));  
+```javascript
+function add(A, B) {
+    return A.map((row, i) => row.map((val, j) => val + B[i][j]));
+}
+
+function sub(A, B) {
+    return A.map((row, i) => row.map((val, j) => val - B[i][j]));
+}
+
+function strassen(A, B) {
+    const n = A.length;
+    if (n === 1) return [[A[0][0] * B[0][0]]];
+
+    const k = n / 2;
+    const [A11, A12, A21, A22] = splitMatrix(A, k);
+    const [B11, B12, B21, B22] = splitMatrix(B, k);
+
+    const M1 = strassen(add(A11, A22), add(B11, B22));
+    const M2 = strassen(add(A21, A22), B11);
+    const M3 = strassen(A11, sub(B12, B22));
+    const M4 = strassen(A22, sub(B21, B11));
+    const M5 = strassen(add(A11, A12), B22);
+    const M6 = strassen(sub(A21, A11), add(B11, B12));
+    const M7 = strassen(sub(A12, A22), add(B21, B22));
+
+    const C11 = add(sub(add(M1, M4), M5), M7);
+    const C12 = add(M3, M5);
+    const C21 = add(M2, M4);
+    const C22 = add(sub(add(M1, M3), M2), M6);
+
+    return combineMatrix(C11, C12, C21, C22);
+}
+
+function splitMatrix(M, size) {
+    const A11 = M.slice(0, size).map(row => row.slice(0, size));
+    const A12 = M.slice(0, size).map(row => row.slice(size));
+    const A21 = M.slice(size).map(row => row.slice(0, size));
+    const A22 = M.slice(size).map(row => row.slice(size));
+    return [A11, A12, A21, A22];
+}
+
+function combineMatrix(C11, C12, C21, C22) {
+    const top = C11.map((row, i) => [...row, ...C12[i]]);
+    const bottom = C21.map((row, i) => [...row, ...C22[i]]);
+    return [...top, ...bottom];
+}
+
+// Example usage
+const A = [
+    [1, 2],
+    [3, 4]
+];
+const B = [
+    [5, 6],
+    [7, 8]
+];
+const result = strassen(A, B);
+console.log("Resultant Matrix:");
+result.forEach(row => console.log(row.join(" ")));
+```
+
    
 
 **Time complexity: O(n^2.81)**
