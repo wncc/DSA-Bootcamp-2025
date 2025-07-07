@@ -29,7 +29,3 @@ This folder contains a curated list of Dynamic Programming problems for **Week 6
 - Then memoize it (top-down).
 - Finally, convert to tabulation (bottom-up).
 - Visualize the state space where possible.
-
-
-Feel free to solve them in order or jump to topics where you feel less confident. Add your own notes, solutions, or insights inside this folder as well.
-
