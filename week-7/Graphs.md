@@ -322,5 +322,133 @@ function bfs(adj) {
 
 ## Disconnected Graph Traversal
 - Perform DFS/BFS from **every unvisited vertex**
+## BFS for Disconnected Graph
+
+### 🔹 Python
+
+```python
+from collections import deque
+
+def bfsOfGraph(adj, s, visited, res):
+    q = deque()
+    visited[s] = True
+    q.append(s)
+    
+    while q:
+        curr = q.popleft()
+        res.append(curr)
+        for x in adj[curr]:
+            if not visited[x]:
+                visited[x] = True
+                q.append(x)
+    return res
+
+def bfsDisconnected(adj):
+    V = len(adj)
+    res = []
+    visited = [False] * V
+    for i in range(V):
+        if not visited[i]:
+            bfsOfGraph(adj, i, visited, res)
+    return res
+
+if __name__ == "__main__":
+    adj = [[1, 2], [0], [0], [4], [3, 5], [4]]
+    ans = bfsDisconnected(adj)
+    for i in ans:
+        print(i, end=" ")
+```
+
+---
+
+### 🔹 C++
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void bfs(vector<vector<int>>& adj, int s, vector<bool>& visited, vector<int>& res) {
+    queue<int> q;
+    visited[s] = true;
+    q.push(s);
+    
+    while (!q.empty()) {
+        int curr = q.front();
+        q.pop();
+        res.push_back(curr);
+        for (int x : adj[curr]) {
+            if (!visited[x]) {
+                visited[x] = true;
+                q.push(x);
+            }
+        }
+    }
+}
+
+vector<int> bfsDisconnected(vector<vector<int>>& adj) {
+    int V = adj.size();
+    vector<int> res;
+    vector<bool> visited(V, false);
+    
+    for (int i = 0; i < V; ++i) {
+        if (!visited[i]) {
+            bfs(adj, i, visited, res);
+        }
+    }
+    return res;
+}
+
+int main() {
+    vector<vector<int>> adj = {{1, 2}, {0}, {0}, {4}, {3, 5}, {4}};
+    vector<int> ans = bfsDisconnected(adj);
+    for (auto i : ans) {
+        cout << i << " ";
+    }
+    return 0;
+}
+```
+
+---
+
+### 🔹 JavaScript
+
+```javascript
+function bfsOfGraph(adj, s, visited, res) {
+    let q = [];
+    visited[s] = true;
+    q.push(s);
+    
+    while (q.length > 0) {
+        let curr = q.shift();
+        res.push(curr);
+        for (let x of adj[curr]) {
+            if (!visited[x]) {
+                visited[x] = true;
+                q.push(x);
+            }
+        }
+    }
+    return res;
+}
+
+function bfsDisconnected(adj) {
+    let V = adj.length;
+    let res = [];
+    let visited = new Array(V).fill(false);
+    
+    for (let i = 0; i < V; i++) {
+        if (!visited[i]) {
+            bfsOfGraph(adj, i, visited, res);
+        }
+    }
+    return res;
+}
+
+let adj = [[1, 2], [0], [0], [4], [3, 5], [4]];
+let ans = bfsDisconnected(adj);
+for (let i of ans) {
+    process.stdout.write(i + " ");
+}
+```
 
 This document provides a complete guide to basic graph theory, representation methods, and traversal techniques implemented in Python, C++, and JavaScript for better clarity and GitHub documentation.
