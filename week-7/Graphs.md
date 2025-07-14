@@ -1,43 +1,48 @@
-# Graphs - Complete Guide
+# 📘 Graphs - Complete Guide
 
-## What is a Graph?
-A **graph** is a non-linear data structure that consists of a set of **vertices** (nodes) and a set of **edges** connecting pairs of vertices.
-
----
-
-## Components of Graph
-- **Vertices (Nodes)**: Fundamental units of a graph.
-- **Edges (Links)**: Connections between vertices.
+## 📌 What is a Graph?
+A **graph** is a non-linear data structure consisting of:
+- **Vertices (nodes)**: Represent entities.
+- **Edges (connections)**: Represent relationships.
 
 ---
 
-## Types of Graphs
+## 🧩 Components of a Graph
 
-1. **Null Graph**: No edges.
-2. **Trivial Graph**: One vertex, no edges.
-3. **Undirected Graph**: Edges have no direction.
-4. **Directed Graph (Digraph)**: Edges have direction.
-5. **Connected Graph**: All vertices are reachable from any other vertex.
-6. **Disconnected Graph**: At least one vertex is unreachable.
-7. **Regular Graph**: All vertices have the same degree `k`.
-8. **Complete Graph**: Every vertex connected to every other vertex.
-9. **Cycle Graph**: All vertices form a cycle.
-10. **Cyclic Graph**: Contains at least one cycle.
-11. **Directed Acyclic Graph (DAG)**: Directed with no cycles.
-12. **Bipartite Graph**: Vertices can be divided into two sets with no internal edges.
-13. **Weighted Graph**: Edges have weights. Can be directed or undirected.
+- **Vertices**: Nodes (can be labeled or unlabelled)
+- **Edges**: Connect pairs of vertices (can be directed/undirected, weighted/unweighted)
 
 ---
 
-## Graph Representations
+## 🧠 Types of Graphs
 
-### 1. Adjacency Matrix
-- 2D Matrix
-- `mat[i][j] = 1` if there is an edge from vertex i to j
+| Type                | Description |
+|---------------------|-------------|
+| Null Graph          | No edges |
+| Trivial Graph       | Only 1 vertex |
+| Undirected Graph    | No direction to edges |
+| Directed Graph      | Direction on edges |
+| Connected Graph     | Path exists between every pair of vertices |
+| Disconnected Graph  | At least one pair of nodes is unreachable |
+| Regular Graph       | Each vertex has same degree |
+| Complete Graph      | Each vertex is connected to every other |
+| Cycle Graph         | Vertices form a cycle |
+| Cyclic Graph        | Contains at least one cycle |
+| Directed Acyclic Graph (DAG) | Directed graph with no cycles |
+| Bipartite Graph     | Vertices can be divided into two sets with no intra-set edges |
+| Weighted Graph      | Edges have weights |
+
+---
+
+## 🛠️ Graph Representations
+
+### 📗 Adjacency Matrix
+
+- 2D array
+- `mat[i][j] = 1` means an edge exists between vertex `i` and `j`
 
 #### Python
 ```python
-# Adjacency Matrix in Python
 def add_edge(mat, i, j):
     mat[i][j] = 1
     mat[j][i] = 1  # Undirected
@@ -83,7 +88,6 @@ int main() {
     addEdge(mat, 2, 3);
     cout << "Adjacency Matrix Representation" << endl;
     displayMatrix(mat);
-    return 0;
 }
 ```
 
@@ -110,8 +114,9 @@ displayMatrix(mat);
 
 ---
 
-### 2. Adjacency List
-- Each vertex stores a list of connected vertices
+### 📘 Adjacency List
+
+- Each vertex holds a list of its neighbors
 
 #### Python
 ```python
@@ -161,7 +166,6 @@ int main() {
     addEdge(adj, 2, 3);
     cout << "Adjacency List Representation:" << endl;
     displayAdjList(adj);
-    return 0;
 }
 ```
 
@@ -188,17 +192,24 @@ displayAdjList(adj);
 
 ---
 
-| Operation            | Adjacency Matrix | Adjacency List |
-|---------------------|------------------|----------------|
-| Adding Edge         | O(1)             | O(1)           |
-| Removing Edge       | O(1)             | O(N)           |
-| Initialization      | O(N*N)           | O(N)           |
+## ⚖️ Matrix vs List Comparison
+
+| Operation         | Adjacency Matrix | Adjacency List |
+|------------------|------------------|----------------|
+| Add Edge         | O(1)             | O(1)           |
+| Remove Edge      | O(1)             | O(N)           |
+| Initialize Graph | O(N²)            | O(N)           |
 
 ---
 
-## Graph Traversals
+## 🔍 Graph Traversal
 
-### Depth First Search (DFS)
+### 🔹 Depth First Search (DFS)
+
+#### Key Ideas:
+- Traverse deep into the graph before backtracking.
+- Time: O(V + E), Space: O(V)
+
 #### Python
 ```python
 def dfsRec(adj, visited, s, res):
@@ -215,44 +226,14 @@ def DFS(adj):
     return res
 ```
 
-#### C++
-```cpp
-void dfsRec(vector<vector<int>> &adj, vector<bool> &visited, int s, vector<int> &res) {
-    visited[s] = true;
-    res.push_back(s);
-    for (int i : adj[s])
-        if (!visited[i]) dfsRec(adj, visited, i, res);
-}
-
-vector<int> DFS(vector<vector<int>> &adj) {
-    vector<bool> visited(adj.size(), false);
-    vector<int> res;
-    dfsRec(adj, visited, 0, res);
-    return res;
-}
-```
-
-#### JavaScript
-```javascript
-function dfsRec(adj, visited, s, res) {
-    visited[s] = true;
-    res.push(s);
-    for (let i = 0; i < adj.length; i++) {
-        if (adj[s][i] === 1 && !visited[i]) dfsRec(adj, visited, i, res);
-    }
-}
-
-function DFS(adj) {
-    const visited = new Array(adj.length).fill(false);
-    const res = [];
-    dfsRec(adj, visited, 0, res);
-    return res;
-}
-```
-
 ---
 
-### Breadth First Search (BFS)
+### 🔹 Breadth First Search (BFS)
+
+#### Key Ideas:
+- Explore neighbors level-by-level
+- Uses a queue
+
 #### Python
 ```python
 from collections import deque
@@ -273,182 +254,45 @@ def bfs(adj):
     return res
 ```
 
-#### C++
-```cpp
-vector<int> bfs(vector<vector<int>>& adj) {
-    int V = adj.size();
-    vector<bool> visited(V, false);
-    vector<int> res;
-    queue<int> q;
-    q.push(0);
-    visited[0] = true;
-    while (!q.empty()) {
-        int curr = q.front();
-        q.pop();
-        res.push_back(curr);
-        for (int x : adj[curr]) {
-            if (!visited[x]) {
-                visited[x] = true;
-                q.push(x);
-            }
-        }
-    }
-    return res;
-}
-```
-
-#### JavaScript
-```javascript
-function bfs(adj) {
-    let V = adj.length;
-    let visited = new Array(V).fill(false);
-    let res = [], q = [0];
-    visited[0] = true;
-    while (q.length > 0) {
-        let curr = q.shift();
-        res.push(curr);
-        for (let x of adj[curr]) {
-            if (!visited[x]) {
-                visited[x] = true;
-                q.push(x);
-            }
-        }
-    }
-    return res;
-}
-```
-
 ---
 
-## Disconnected Graph Traversal
-- Perform DFS/BFS from **every unvisited vertex**
-## BFS for Disconnected Graph
+## 🔄 Traversing Disconnected Graphs
 
-### 🔹 Python
+Use loops to ensure **DFS** or **BFS** is called on all components:
 
 ```python
-from collections import deque
-
-def bfsOfGraph(adj, s, visited, res):
-    q = deque()
-    visited[s] = True
-    q.append(s)
-    
-    while q:
-        curr = q.popleft()
-        res.append(curr)
-        for x in adj[curr]:
-            if not visited[x]:
-                visited[x] = True
-                q.append(x)
-    return res
-
-def bfsDisconnected(adj):
+def dfs_disconnected(adj):
     V = len(adj)
-    res = []
     visited = [False] * V
+    res = []
     for i in range(V):
         if not visited[i]:
-            bfsOfGraph(adj, i, visited, res)
+            dfsRec(adj, visited, i, res)
     return res
-
-if __name__ == "__main__":
-    adj = [[1, 2], [0], [0], [4], [3, 5], [4]]
-    ans = bfsDisconnected(adj)
-    for i in ans:
-        print(i, end=" ")
 ```
 
 ---
 
-### 🔹 C++
+## 🖼️ Images
 
-```cpp
-#include <bits/stdc++.h>
-using namespace std;
-
-void bfs(vector<vector<int>>& adj, int s, vector<bool>& visited, vector<int>& res) {
-    queue<int> q;
-    visited[s] = true;
-    q.push(s);
-    
-    while (!q.empty()) {
-        int curr = q.front();
-        q.pop();
-        res.push_back(curr);
-        for (int x : adj[curr]) {
-            if (!visited[x]) {
-                visited[x] = true;
-                q.push(x);
-            }
-        }
-    }
-}
-
-vector<int> bfsDisconnected(vector<vector<int>>& adj) {
-    int V = adj.size();
-    vector<int> res;
-    vector<bool> visited(V, false);
-    
-    for (int i = 0; i < V; ++i) {
-        if (!visited[i]) {
-            bfs(adj, i, visited, res);
-        }
-    }
-    return res;
-}
-
-int main() {
-    vector<vector<int>> adj = {{1, 2}, {0}, {0}, {4}, {3, 5}, {4}};
-    vector<int> ans = bfsDisconnected(adj);
-    for (auto i : ans) {
-        cout << i << " ";
-    }
-    return 0;
-}
+To include images (like graph diagrams), add them in the repo and use:
+```markdown
+![Alt Text](images/graph-example.png)
 ```
 
 ---
 
-### 🔹 JavaScript
+## ✅ Output Example
 
-```javascript
-function bfsOfGraph(adj, s, visited, res) {
-    let q = [];
-    visited[s] = true;
-    q.push(s);
-    
-    while (q.length > 0) {
-        let curr = q.shift();
-        res.push(curr);
-        for (let x of adj[curr]) {
-            if (!visited[x]) {
-                visited[x] = true;
-                q.push(x);
-            }
-        }
-    }
-    return res;
-}
+```
+Adjacency List Representation:
+0: 1 2
+1: 0 2
+2: 0 1 3
+3: 2
 
-function bfsDisconnected(adj) {
-    let V = adj.length;
-    let res = [];
-    let visited = new Array(V).fill(false);
-    
-    for (let i = 0; i < V; i++) {
-        if (!visited[i]) {
-            bfsOfGraph(adj, i, visited, res);
-        }
-    }
-    return res;
-}
-
-let adj = [[1, 2], [0], [0], [4], [3, 5], [4]];
-let ans = bfsDisconnected(adj);
-for (let i of ans) {
-    process.stdout.write(i + " ");
-}
+BFS: 0 1 2 3
+DFS: 0 1 2 3
 ```
 
-This document provides a complete guide to basic graph theory, representation methods, and traversal techniques implemented in Python, C++, and JavaScript for better clarity and GitHub documentation.
+
